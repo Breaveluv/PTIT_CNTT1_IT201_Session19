@@ -22,10 +22,15 @@ void preorder(Node *root) {
     return;
 }
 
-Node *searchBFS(Node *root, int key) {
-
+int searchDFS(Node *root, int key) {
+    if (root == NULL) {
+        return 0;
+    }
+    if (root->data == key) {
+        return 1;
+    }
+    return searchDFS(root->left, key)||searchDFS(root->right,key);
 }
-
 
 int main () {
     Node *root = NULL;
@@ -42,10 +47,17 @@ int main () {
     root->left->right=node4;
     root->right->right=node5;
     preorder(root);
-
+    printf("\n");
     int find;
     printf("Enter the element you want to search: ");
     scanf("%d", &find);
+    if (searchDFS(root,find)==1) {
+        printf("true");
+    }else {
+        printf("false");
+    }
+
+
 
     return 0;
 }
